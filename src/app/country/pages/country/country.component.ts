@@ -17,8 +17,9 @@ export class CountryComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  search() {
+  search(query: string) {
     this.error = false;
+    this.query = query;
     this.countryService.searchCountry(this.query).subscribe(
       (countries) => {
         this.countries = countries;

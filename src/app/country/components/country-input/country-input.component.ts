@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-country-input',
@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class CountryInputComponent implements OnInit {
   query: string = '';
 
+  @Output() onEnter = new EventEmitter<string>();
+
   constructor() {}
 
   ngOnInit(): void {}
 
-  search() {}
+  search() {
+    this.onEnter.emit(this.query);
+  }
 }
