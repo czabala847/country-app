@@ -1,1 +1,58 @@
-<p>country works!</p>
+<h2>Por País</h2>
+
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="search()" autocomplete="off">
+      <input
+        [(ngModel)]="query"
+        type="text"
+        placeholder="Buscar país..."
+        class="form-control"
+        name="query"
+      />
+    </form>
+  </div>
+</div>
+
+<hr />
+
+<div class="row" *ngIf="error; else templateTable">
+  <div class="col">
+    <div class="alert alert-danger">
+      No se encontró nada con el término ABCD
+    </div>
+  </div>
+</div>
+
+<ng-template #templateTable>
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Bandera</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Población</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Bandera</td>
+              <td>Nombre</td>
+              <td>1234</td>
+              <td>
+                <a href="country/col">Ver más...</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-template>
