@@ -30,4 +30,8 @@ export class CountryComponent implements OnInit {
       }
     );
   }
+
+  suggestion(value: string) {
+    console.log(value);
+  }
 }

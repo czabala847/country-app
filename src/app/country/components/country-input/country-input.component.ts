@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-country-input',
@@ -9,12 +11,23 @@ export class CountryInputComponent implements OnInit {
   query: string = '';
 
   @Output() onEnter = new EventEmitter<string>();
+  @Output() onDebounce = new EventEmitter<string>();
+
+  deboucer: Subject<string> = new Subject();
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.deboucer.pipe(debounceTime(300)).subscribe((value) => {
+      this.onDebounce.emit(value);
+    });
+  }
 
   search() {
     this.onEnter.emit(this.query);
+  }
+
+  keyPressed() {
+    this.deboucer.next(this.query);
   }
 }
