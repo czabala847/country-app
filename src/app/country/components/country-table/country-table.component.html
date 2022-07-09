@@ -12,15 +12,12 @@
     <tr *ngFor="let country of countries; index as i">
       <td>{{ i + 1 }}</td>
       <td>
-        <img
-          [src]="country.flags.png"
-          [alt]="'Bandera ' + country.name.common"
-        />
+        <img [src]="country.flags.png" [alt]="'Bandera ' + country.name" />
       </td>
-      <td>{{ country.capital }} - {{ country.name.common }}</td>
+      <td>{{ country.capital }} - {{ country.name }}</td>
       <td>{{ country.population | number }}</td>
       <td>
-        <a [routerLink]="['country', country.cca2]">Ver más...</a>
+        <a [routerLink]="['country', country.alpha3Code]">Ver más...</a>
       </td>
     </tr>
   </tbody>
