@@ -12,6 +12,8 @@ export class CountryComponent implements OnInit {
   query: string = '';
   error: boolean = false;
   countries: Country[] = [];
+  countriesSuggestion: Country[] = [];
+  showSuggestion: boolean = false;
 
   constructor(private countryService: CountryService) {}
 
@@ -19,6 +21,7 @@ export class CountryComponent implements OnInit {
 
   search(query: string) {
     this.error = false;
+    this.showSuggestion = false;
     this.query = query;
     this.countryService.searchCountry(this.query).subscribe(
       (countries) => {
@@ -32,6 +35,17 @@ export class CountryComponent implements OnInit {
   }
 
   suggestion(value: string) {
-    console.log(value);
+    if (value !== '') {
+      this.showSuggestion = true;
+      this.error = false;
+      this.query = value;
+      this.countryService.searchCountry(value).subscribe(
+        (countries) => (this.countriesSuggestion = countries.splice(0, 5)),
+        (error) => (this.countriesSuggestion = [])
+      );
+    } else {
+      this.countriesSuggestion = [];
+      this.showSuggestion = false;
+    }
   }
 }
