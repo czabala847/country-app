@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Country } from '../interfaces/country.interface';
 
@@ -21,6 +22,8 @@ export class CountryService {
   }
 
   searchByCode(id: string): Observable<Country> {
-    return this.http.get<Country>(`${this.apiUrl}/alpha/${id}`);
+    return this.http
+      .get<Country[]>(`${this.apiUrl}/alpha/${id}`)
+      .pipe(map((dataCountry) => dataCountry[0]));
   }
 }
