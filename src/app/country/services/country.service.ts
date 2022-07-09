@@ -10,6 +10,7 @@ import { Country } from '../interfaces/country.interface';
 })
 export class CountryService {
   private apiUrl: string = 'https://restcountries.com/v3.1/';
+  private apiUrlV2: string = 'https://restcountries.com/v2/';
 
   constructor(private http: HttpClient) {}
 
@@ -25,5 +26,11 @@ export class CountryService {
     return this.http
       .get<Country[]>(`${this.apiUrl}/alpha/${id}`)
       .pipe(map((dataCountry) => dataCountry[0]));
+  }
+
+  searchByRegional(codeRegional: string): Observable<Country[]> {
+    return this.http.get<Country[]>(
+      `${this.apiUrlV2}regionalbloc/${codeRegional}`
+    );
   }
 }
