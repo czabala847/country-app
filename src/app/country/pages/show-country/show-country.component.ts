@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 import { CountryService } from '../../services/country.service';
 
@@ -15,12 +16,10 @@ export class ShowCountryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(({ id }) => {
-      if (id) {
-        this.countryService.searchByCode(id).subscribe((country) => {
-          console.log(country);
-        });
-      }
-    });
+    this.route.params
+      .pipe(switchMap(({ id }) => this.countryService.searchByCode(id)))
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }
