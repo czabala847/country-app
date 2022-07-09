@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -10,6 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 export class CountryInputComponent implements OnInit {
   query: string = '';
 
+  @Input() placeholder: string = '';
   @Output() onEnter = new EventEmitter<string>();
   @Output() onDebounce = new EventEmitter<string>();
 

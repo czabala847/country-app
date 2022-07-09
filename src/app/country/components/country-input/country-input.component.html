@@ -2,7 +2,7 @@
   <input
     [(ngModel)]="query"
     type="text"
-    placeholder="Buscar país..."
+    [placeholder]="placeholder"
     class="form-control"
     name="query"
     (input)="keyPressed()"
